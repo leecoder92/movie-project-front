@@ -1,6 +1,6 @@
 <template>
   <div>    
-    <h2>영화 목록</h2>
+    <h1>영화 목록</h1>
   </div>
 </template>
 
