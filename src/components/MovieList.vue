@@ -1,12 +1,18 @@
 <template>
   <div>    
-    <h1>영화 목록</h1>
+    <movie-list-item></movie-list-item>
   </div>
 </template>
 
 <script>
+import MovieListItem from '@/components/MovieListItem.vue'
+
 export default {
   name: 'MovieList',
+  components: {
+    MovieListItem,
+  },
+  
 }
 </script>
 
