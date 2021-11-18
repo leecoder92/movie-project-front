@@ -36,6 +36,7 @@ export default {
     axios({
       method: 'get',
       url: 'http://127.0.0.1:8000/movies/',
+      headers: this.setToken()
     })
       .then(res => {        
         for (let movie of res.data) {
@@ -47,6 +48,13 @@ export default {
       })
   },
   methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
     onMovieDetail: function (detail) {
       this.selectedMovie = detail
     }
