@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Recommendation from '@/views/Recommendation.vue'
-import Community from '@/views/Community.vue'
+import Home from '../views/movies/Home.vue'
+import Recommendation from '@/views/movies/Recommendation.vue'
+import Community from '@/views/movies/Community.vue'
 
 Vue.use(VueRouter)
 
