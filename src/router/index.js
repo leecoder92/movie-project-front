@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/movies/Home.vue'
 import Recommendation from '@/views/movies/Recommendation.vue'
 import Community from '@/views/movies/Community.vue'
-
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 

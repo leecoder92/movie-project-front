@@ -1,10 +1,6 @@
 <template>
   <div>
-    <movie-detail
-      v-if="selectedMovie"
-      :detail="selectedMovie"
-    >
-    </movie-detail>
+    <movie-detail v-if="selectedMovie" :detail="selectedMovie"> </movie-detail>
     <movie-card
       v-for="movie in movies"
       :key="movie.id"
@@ -36,14 +32,14 @@ export default {
     axios({
       method: 'get',
       url: 'http://127.0.0.1:8000/movies/',
-      headers: this.setToken()
+      // headers: this.setToken(),
     })
-      .then(res => {        
+      .then((res) => {
         for (let movie of res.data) {
           this.movies.push(movie)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err)
       })
   },
@@ -51,13 +47,13 @@ export default {
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
-        Authorization: `JWT ${token}`
+        Authorization: `JWT ${token}`,
       }
       return config
     },
     onMovieDetail: function (detail) {
       this.selectedMovie = detail
-    }
-  }
+    },
+  },
 }
 </script>
