@@ -45,7 +45,21 @@
               </li>
             </ul>
           </span>
-          <span>
+
+          <span v-if="isLogin">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <router-link
+                  class="nav-link active"
+                  aria-current="page"
+                  @click.native="logout"
+                  to="#"
+                  >로그아웃</router-link
+                >
+              </li>
+            </ul>
+          </span>
+          <span v-else>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <router-link
@@ -63,31 +77,28 @@
                   >로그인</router-link
                 >
               </li>
-              <li class="nav-item">
-                <router-link
-                  class="nav-link active"
-                  aria-current="page"
-                  @click.native="logout"
-                  to="#"
-                  >로그아웃</router-link
-                >
-              </li>
             </ul>
           </span>
         </div>
       </div>
     </nav>
-
-    <!-- <span>
-          <router-link :to="{ name: 'Signup' }"> 회원가입 </router-link>
-          <router-link :to="{ name: 'Login' }"> 로그인 </router-link>
-        </span> -->
-    <router-view />
+    <router-view @login="isLogin = true" />
   </div>
 </template>
 <script>
 export default {
   name: 'App',
+  data: function () {
+    return {
+      isLogin: false,
+    }
+  },
+  created: function () {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      this.isLogin = true
+    }
+  },
   methods: {
     logout: function () {
       this.isLogin = false
