@@ -8,7 +8,7 @@
       <p>{{ detail.overview }}</p>
       <p>평점: {{detail.vote_average}}</p>
       <p>출시일: {{ detail.release_date }}</p>
-      <p>장르: {{ detail.genres }}</p>
+      <p>장르: <span v-for="genre in detail.genres" :key="genre.id"> {{ genre.name }} |</span></p>
     </div>
   </div>
 </template>
@@ -19,22 +19,11 @@ export default {
   props: {
     detail: Object,
   },
-  data: function () {
-    return {
-      genreNames: [],
-    }
-  },
   computed: {
     imgUrl: function () {
       return `https://image.tmdb.org/t/p/w500${this.detail.poster_path}`
     },
   },
-  created: function () {
-    for (let genre of this.detail.genres) {
-      this.genreNames.push(genre.name)
-    }
-    console.log(this.genreNames)
-  }
 }
 </script>
 
