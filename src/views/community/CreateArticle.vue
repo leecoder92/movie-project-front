@@ -6,18 +6,11 @@
       <input v-model.trim="title" type="text">
     </div>
     <div>
-      <label for="text">영화 제목: </label>
-      <input v-model.trim="movie_title" type="text">
-    </div>
-    <div>
       <label for="content">글 내용: </label>
       <textarea v-model="content" name="content" id="content" cols="30" rows="10"></textarea>
     </div>
-    <div>
-      <label for="#">영화 평점: </label>
-      <input v-model="rank" type="text" placeholder="숫자만 기입하세요">
-    </div>
     <button @click="requestCreate">작성하기</button>
+    <button @click="returnToCommunity">뒤로 가기</button>
   </div>
 </template>
 
@@ -25,12 +18,10 @@
 import axios from 'axios'
 
 export default {
-  name: 'CreateReview',
+  name: 'CreateArticle',
   data: function () {
     return {
       title: null,
-      movie_title: null,
-      rank: null,
       content: null,
     }
   },
@@ -43,16 +34,14 @@ export default {
       return config
     },
     requestCreate: function () {
-      const reviewItem = {
+      const articleItem = {
         title: this.title,
-        movie_title: this.movie_title,
-        rank: this.rank,
         content: this.content
       }
       axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/community/',
-        data: reviewItem,
+        data: articleItem,
         headers: this.setToken()
       })
         .then(res => {
@@ -62,6 +51,9 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    returnToCommunity: function () {
+      this.$router.push({name: 'Community'})
     }
   }
 }

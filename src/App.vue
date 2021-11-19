@@ -98,6 +98,7 @@ export default {
     if (token) {
       this.isLogin = true
     }
+    this.$router.push({name:'Home'})
   },
   methods: {
     logout: function () {

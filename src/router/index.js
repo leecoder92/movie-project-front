@@ -3,9 +3,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/movies/Home.vue'
 import Recommendation from '@/views/movies/Recommendation.vue'
 import Community from '@/views/community/Community.vue'
+import CreateArticle from '@/views/community/CreateArticle.vue'
+import ArticleDetail from '@/views/community/ArticleDetail.vue'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
-import CreateReview from '@/views/community/CreateReview.vue'
+
 
 Vue.use(VueRouter)
 
@@ -27,8 +29,13 @@ const routes = [
   },
   {
     path: '/community/create',
-    name: 'CreateReview',
-    component: CreateReview,
+    name: 'CreateArticle',
+    component: CreateArticle,
+  },
+  {
+    path: '/community/:articleId',
+    name: 'ArticleDetail',
+    component: ArticleDetail,
   },
   {
     path: '/accounts/signup',

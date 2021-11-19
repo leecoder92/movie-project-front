@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>커뮤니티</h1>
-    <div v-for="review in reviews" :key="review.id">
-      <h3>제목: {{ review.title }}</h3>
+    <div v-for="article in articles" :key="article.id">      
+      <h1>{{ article.id }}. 제목: {{ article.title }}</h1>
     </div>
-    <button @click="createReview">글 작성</button>
+    <button @click="createArticle">글 작성</button>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   name: 'Community',
   data: function () {
     return {
-      reviews: null,
+      articles: null,
     }
   },
   methods: {
@@ -26,7 +26,7 @@ export default {
       }
       return config
     },
-    getReviews: function () {
+    getArticles: function () {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/community/',
@@ -34,28 +34,28 @@ export default {
       })
         .then(res => {
           console.log(res)
-          this.reviews = res.data
+          this.articles = res.data
         })
         .catch(err => {
           console.log(err)
         })
     },
-    deleteReview: function (review) {
+    deleteArticles: function (article) {
       axios({
         method: 'delete',
-        url: `http://127.0.0.1:8000/community/${review.id}/`,
+        url: `http://127.0.0.1:8000/community/${article.id}/`,
         headers: this.setToken()
       })
         .then(res => {
           console.log(res)
-          this.getReviews()
+          this.getArticles()
         })
         .catch(err => {
           console.log(err)
         })
     },
-    createReview: function () {
-      this.$router.push({name: 'CreateReview'})
+    createArticle: function () {
+      this.$router.push({name: 'CreateArticle'})
     },
     // updateReviewStatus: function (review) {
     //   const reviewItem = {
@@ -76,7 +76,7 @@ export default {
   },
   created: function () {
     if (localStorage.getItem('jwt')) {
-      this.getReviews()
+      this.getArticles()
     } else {
       this.$router.push({name: 'Login'})
     }
