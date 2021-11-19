@@ -39,7 +39,7 @@
                 <router-link
                   class="nav-link active"
                   aria-current="page"
-                  to="/movies/community"
+                  to="/community"
                   >커뮤니티</router-link
                 >
               </li>

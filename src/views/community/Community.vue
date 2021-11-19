@@ -2,9 +2,9 @@
   <div>
     <h1>커뮤니티</h1>
     <div v-for="review in reviews" :key="review.id">
-      <h3>- 제목: {{ review.title }}</h3>
+      <h3>제목: {{ review.title }}</h3>
     </div>
-    <button>글 작성</button>
+    <button @click="createReview">글 작성</button>
   </div>
 </template>
 
@@ -54,6 +54,9 @@ export default {
           console.log(err)
         })
     },
+    createReview: function () {
+      this.$router.push({name: 'CreateReview'})
+    },
     // updateReviewStatus: function (review) {
     //   const reviewItem = {
     //     ...review,
@@ -70,7 +73,7 @@ export default {
     //       review.is_completed = !review.is_completed
     //     })
     //   },
-    },
+  },
   created: function () {
     if (localStorage.getItem('jwt')) {
       this.getReviews()
