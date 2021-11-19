@@ -1,11 +1,15 @@
 <template>
   <div>
-    <h1>
-      제목: {{ article.title }}
-    </h1>
-    <p>내용: {{ article.content }}</p>
-    <button @click="updateArticle">수정</button>
-    <button @click="deleteArticle(article)">삭제</button>
+    <h1>글 수정</h1>
+    <div>
+      <label for="text">글 제목: </label>
+      <input v-model.trim="article.title" type="text">
+    </div>
+    <div>
+      <label for="content">글 내용: </label>
+      <textarea v-model.trim="article.content" name="content" id="content" cols="30" rows="10"></textarea>
+    </div>
+    <button @click="requestUpdate(article)">수정하기</button>
   </div>
 </template>
 
@@ -13,7 +17,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'ArticleDetail',
+  name: 'UpdateArticle',
   data: function () {
     return {
       article: null,
@@ -30,13 +34,14 @@ export default {
       }
       return config
     },
-    updateArticle: function () {
-      this.$router.push({name: 'UpdateArticle', params: { article: this.article }})
-    },
-    deleteArticle: function (article) {
+    requestUpdate: function (article) {
+      const articleItem = {
+        ...article,
+      }
       axios({
-        method: 'delete',
+        method: 'put',
         url: `http://127.0.0.1:8000/community/${article.id}/`,
+        data: articleItem,
         headers: this.setToken()
       })
         .then(res => {
@@ -47,7 +52,7 @@ export default {
           console.log(err)
         })
     },
-  },
+  }
 }
 </script>
 

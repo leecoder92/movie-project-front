@@ -2,9 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/movies/Home.vue'
 import Recommendation from '@/views/movies/Recommendation.vue'
+
 import Community from '@/views/community/Community.vue'
 import CreateArticle from '@/views/community/CreateArticle.vue'
 import ArticleDetail from '@/views/community/ArticleDetail.vue'
+import UpdateArticle from '@/views/community/UpdateArticle.vue'
+
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 
@@ -36,6 +39,11 @@ const routes = [
     path: '/community/:articleId',
     name: 'ArticleDetail',
     component: ArticleDetail,
+  },
+  {
+    path: '/community/:articleId/update',
+    name: 'UpdateArticle',
+    component: UpdateArticle,
   },
   {
     path: '/accounts/signup',

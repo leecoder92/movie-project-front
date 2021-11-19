@@ -1,8 +1,10 @@
 <template>
   <div>
     <h1>커뮤니티</h1>
-    <div v-for="article in articles" :key="article.id">      
-      <h1>{{ article.id }}. 제목: {{ article.title }}</h1>
+    <div v-for="article in articles" :key="article.id">
+      <router-link :to="{ name: 'ArticleDetail', params: { articleId: article.id, article: article } }" :article="article">
+        {{ article.id }}. 제목: {{ article.title }}
+      </router-link>
     </div>
     <button @click="createArticle">글 작성</button>
   </div>
@@ -33,7 +35,7 @@ export default {
         headers: this.setToken() // Authorization: JWT tokensdjiadnoiqwnd
       })
         .then(res => {
-          console.log(res)
+          // console.log(res)
           this.articles = res.data
         })
         .catch(err => {
