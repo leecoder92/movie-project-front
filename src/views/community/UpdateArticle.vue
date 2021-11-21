@@ -44,8 +44,8 @@ export default {
         data: articleItem,
         headers: this.setToken()
       })
-        .then(res => {
-          console.log(res)
+        .then(() => {
+          // console.log(res)
           this.$router.push({name: 'Community'})
         })
         .catch(err => {
