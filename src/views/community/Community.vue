@@ -1,11 +1,14 @@
 <template>
   <div>
     <h1>커뮤니티</h1>
-    <div v-for="article in articles" :key="article.id">
-      <router-link :to="{ name: 'ArticleDetail', params: { articleId: article.id, article: article } }" :article="article">
-        {{ article.id }}. 제목: {{ article.title }}
-      </router-link>
-    </div>
+    <ol v-for="article in articles" :key="article.id">
+      <li>
+        <router-link class="rlink link-dark" :to="{ name: 'ArticleDetail', params: { articleId: article.id, article: article } }" :article="article">
+          {{ article.title }}
+        </router-link>
+      </li>
+      
+    </ol>
     <button @click="createArticle">글 작성</button>
   </div>
 </template>
@@ -32,7 +35,7 @@ export default {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/community/',
-        headers: this.setToken() // Authorization: JWT tokensdjiadnoiqwnd
+        headers: this.setToken()
       })
         .then(res => {
           // console.log(res)
@@ -59,22 +62,6 @@ export default {
     createArticle: function () {
       this.$router.push({name: 'CreateArticle'})
     },
-    // updateReviewStatus: function (review) {
-    //   const reviewItem = {
-    //     ...review,
-    //   }
-
-    //   axios({
-    //     method: 'put',
-    //     url: `http://127.0.0.1:8000/community/${review.id}/`,
-    //     data: reviewItem,
-    //     headers: this.setToken()
-    //   })
-    //     .then(res => {
-    //       console.log(res)
-    //       review.is_completed = !review.is_completed
-    //     })
-    //   },
   },
   created: function () {
     if (localStorage.getItem('jwt')) {
@@ -87,5 +74,7 @@ export default {
 </script>
 
 <style>
-
+.rlink {
+  text-decoration: none;
+}
 </style>
