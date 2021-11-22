@@ -1,13 +1,18 @@
 <template>
   <div>
-    <movie-detail v-if="selectedMovie" :detail="selectedMovie"> </movie-detail>
-    <movie-card
-      v-for="movie in movies"
-      :key="movie.id"
-      :movie="movie"
-      @movie-detail="onMovieDetail"
-    >
-    </movie-card>
+    <div>
+      <movie-detail v-if="selectedMovie" :detail="selectedMovie">
+      </movie-detail>
+    </div>
+    <div>
+      <movie-card
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+        @movie-detail="onMovieDetail"
+      >
+      </movie-card>
+    </div>
   </div>
 </template>
 
