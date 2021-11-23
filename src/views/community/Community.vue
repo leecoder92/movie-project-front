@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <h1>커뮤니티</h1>
-    <ol
-      v-for="article in articles"
-      :key="article.id"
-      class="list-group list-group-numbered"
-    >
-      <ol
-        class="list-group-item d-flex justify-content-between align-items-start"
-      >
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">
+  <div class="container w-50 ">
+
+    <b-card header="자유 게시판" class="text-center">
+      <div class="container-fluid">
+        <b-list-group>
+          <b-list-group-item
+            v-for="article in articles"
+            :key="article.id"
+            class="text-start"
+          >
             <router-link
               class="rlink link-dark"
               :to="{
@@ -21,11 +19,14 @@
             >
               {{ article.title }}
             </router-link>
-          </div>
-        </div>
-      </ol>
-    </ol>
-    <button @click="createArticle">글 작성</button>
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+      <br />
+      <div class="d-flex flex-row-reverse">
+        <b-button pill @click="createArticle"> 글 작성 </b-button>
+      </div>
+    </b-card>
   </div>
 </template>
 

@@ -18,7 +18,7 @@
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
-        </button>        
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <span>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -103,16 +103,16 @@ export default {
     const token = localStorage.getItem('jwt')
     if (token) {
       this.isLogin = true
-      this.getUsername()     
+      this.getUsername()
     }
     if(this.$route.path!=='/movies')
-      this.$router.push({name:'Home'})    
+      this.$router.push({name:'Home'})
   },
   updated: function () {
     const token = localStorage.getItem('jwt')
     if (token) {
       this.isLogin = true
-      this.getUsername()     
+      this.getUsername()
     }
   },
   methods: {
@@ -137,7 +137,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 </style>
