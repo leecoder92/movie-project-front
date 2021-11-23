@@ -5,23 +5,37 @@
       <ul v-for="comment in comments" :key="comment.pk">
         <li>
           {{ comment.content }}
+<<<<<<< Updated upstream
           <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
         </li>        
       </ul>
+=======
+          <button
+            v-if="comment.user_id === loginUserId"
+            @click="deleteComment(comment)"
+          >
+            삭제
+          </button>
+        </li>
+      </ol>
+>>>>>>> Stashed changes
     </div>
-    <hr>
+    <hr />
     <div>
       <label for="text">댓글을 입력하세요:</label>
-      <input v-model.trim="newContent" @keyup.enter="createComment" type="text">
+      <input
+        v-model.trim="newContent"
+        @keyup.enter="createComment"
+        type="text"
+      />
       <button @click="createComment">입력</button>
     </div>
-    
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import jwt_decode from "jwt-decode"
+import jwt_decode from 'jwt-decode'
 
 export default {
   name: 'ArticleComment',
@@ -39,7 +53,7 @@ export default {
     if (localStorage.getItem('jwt')) {
       this.getComments()
     } else {
-      this.$router.push({name: 'Login'})
+      this.$router.push({ name: 'Login' })
     }
     this.getUserID()
     // console.log(this.loginUserId)
@@ -53,7 +67,7 @@ export default {
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
-        Authorization: `JWT ${token}`
+        Authorization: `JWT ${token}`,
       }
       return config
     },
@@ -61,32 +75,32 @@ export default {
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/community/${this.article.id}/comments/`,
-        headers: this.setToken()
+        headers: this.setToken(),
       })
-        .then(res => {
+        .then((res) => {
           // console.log(res)
           this.comments = res.data
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
     createComment: function () {
       const commentItem = {
-        content: this.newContent
+        content: this.newContent,
       }
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/community/${this.article.id}/comments/`,
         data: commentItem,
-        headers: this.setToken()
+        headers: this.setToken(),
       })
         .then(() => {
           // console.log(res)
           this.getComments()
           this.newContent = null
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -94,13 +108,13 @@ export default {
       axios({
         method: 'delete',
         url: `http://127.0.0.1:8000/community/${this.article.id}/${comment.id}/`,
-        headers: this.setToken()
+        headers: this.setToken(),
       })
         .then(() => {
           // console.log(res)
           this.getComments()
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -108,6 +122,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

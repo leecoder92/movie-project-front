@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>커뮤니티</h1>
+<<<<<<< Updated upstream
     <ul v-for="article in articles" :key="article.id">
       <li>
         <router-link class="rlink link-dark" :to="{ name: 'ArticleDetail', params: { articleId: article.id, article: article } }" :article="article">
@@ -9,6 +10,32 @@
       </li>
       
     </ul>
+=======
+    <ol
+      v-for="article in articles"
+      :key="article.id"
+      class="list-group list-group-numbered"
+    >
+      <ol
+        class="list-group-item d-flex justify-content-between align-items-start"
+      >
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">
+            <router-link
+              class="rlink link-dark"
+              :to="{
+                name: 'ArticleDetail',
+                params: { articleId: article.id, article: article },
+              }"
+              :article="article"
+            >
+              {{ article.title }}
+            </router-link>
+          </div>
+        </div>
+      </ol>
+    </ol>
+>>>>>>> Stashed changes
     <button @click="createArticle">글 작성</button>
   </div>
 </template>
@@ -27,7 +54,7 @@ export default {
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
-        Authorization: `JWT ${token}`
+        Authorization: `JWT ${token}`,
       }
       return config
     },
@@ -35,13 +62,13 @@ export default {
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/community/',
-        headers: this.setToken()
+        headers: this.setToken(),
       })
-        .then(res => {
+        .then((res) => {
           // console.log(res)
           this.articles = res.data
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -49,27 +76,27 @@ export default {
       axios({
         method: 'delete',
         url: `http://127.0.0.1:8000/community/${article.id}/`,
-        headers: this.setToken()
+        headers: this.setToken(),
       })
-        .then(res => {
+        .then((res) => {
           console.log(res)
           this.getArticles()
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
     createArticle: function () {
-      this.$router.push({name: 'CreateArticle'})
+      this.$router.push({ name: 'CreateArticle' })
     },
   },
   created: function () {
     if (localStorage.getItem('jwt')) {
       this.getArticles()
     } else {
-      this.$router.push({name: 'Login'})
+      this.$router.push({ name: 'Login' })
     }
-  }
+  },
 }
 </script>
 

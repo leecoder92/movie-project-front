@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>영화 추천</h1>
+    <!-- <<<<<<< Updated upstream
     <div>
       <h3>일단, 내가 남긴 리뷰 가져오기!</h3>
       <ul v-for="review in myReviews" :key="review.id">
@@ -9,48 +10,70 @@
         </li>
       </ul>
     </div>
+======= -->
+    <user-recommend
+      v-for="movie in movies"
+      :key="movie.id"
+      :movie="movie"
+      @movie-detail="onMovieDetail"
+    ></user-recommend>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+// <<<<<<< Updated upstream
+// import axios from 'axios'
 
+// export default {
+//   name: 'Recommendation',
+//   data: function () {
+//     return {
+//       myReviews: null,
+//     }
+//   },
+//   created: function () {
+//     this.getMyReviews()
+// =======
+import UserRecommend from '@/components/UserRecommend.vue'
+import axios from 'axios'
 export default {
   name: 'Recommendation',
+  components: { UserRecommend },
   data: function () {
     return {
-      myReviews: null,
+      movies: [],
+      selectedMovie: null,
     }
   },
   created: function () {
-    this.getMyReviews()
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/movies/recommend/',
+      headers: this.setToken(),
+    })
+      .then((res) => {
+        console.log(res)
+        this.movies = res.data
+
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   methods: {
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
-        Authorization: `JWT ${token}`
+        Authorization: `JWT ${token}`,
       }
+
       return config
     },
-    getMyReviews: function () {
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/movies/recommendation/`,
-        headers: this.setToken()
-      })
-        .then(res => {
-          console.log(res)
-          this.myReviews = res.data
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },    
-  }
+    onMovieDetail: function (detail) {
+      this.selectedMovie = detail
+    },
+  },
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

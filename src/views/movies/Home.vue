@@ -27,7 +27,6 @@ export default {
     axios({
       method: 'get',
       url: 'http://127.0.0.1:8000/movies/',
-      // headers: this.setToken(),
     })
       .then((res) => {
         for (let movie of res.data) {

@@ -15,7 +15,7 @@
             {{ genre.name }} |</span
           >
         </p>
-        <review :detail="detail" > </review>
+        <review :detail="detail"> </review>
       </div>
     </div>
     <button @click="backtoHome">back</button>
@@ -33,6 +33,7 @@ export default {
     return {
       reviews: null,
       detail: null,
+
     }
   },
   created: function () {
@@ -43,11 +44,13 @@ export default {
       return `https://image.tmdb.org/t/p/w500${this.detail.poster_path}`
     },
   },
+
   methods: {
     backtoHome: function () {
       this.$router.push({name: 'Home'})
     },
   }
+
 }
 </script>
 
