@@ -29,9 +29,7 @@ export default {
       url: 'http://127.0.0.1:8000/movies/',
     })
       .then((res) => {
-        for (let movie of res.data) {
-          this.movies.push(movie)
-        }
+        this.movies = res.data
       })
       .catch((err) => {
         console.log(err)

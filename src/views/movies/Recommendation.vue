@@ -3,10 +3,10 @@
     <h1>영화 추천</h1>
     <!-- <<<<<<< Updated upstream
     <div>
-      <h3>일단, 내가 남긴 리뷰 가져오기!</h3>
+      <h3>설명: 로그인한 사람이 평점을 4점 이상으로 남긴 영화들의 장르를 모아서 비슷한 장르의 영화를 추천</h3>
       <ul v-for="review in myReviews" :key="review.id">
         <li>
-          {{ review.content }}
+          {{ review.rank }}점: {{ review.movie.title }}
         </li>
       </ul>
     </div>
