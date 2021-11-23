@@ -1,36 +1,26 @@
 <template>
   <div>
-    <div>
-      <movie-detail v-if="selectedMovie" :detail="selectedMovie">
-      </movie-detail>
-    </div>
-    <div>
       <movie-card
         v-for="movie in movies"
         :key="movie.id"
         :movie="movie"
-        @movie-detail="onMovieDetail"
       >
       </movie-card>
-    </div>
   </div>
 </template>
 
 <script>
 import MovieCard from '@/components/MovieCard.vue'
-import MovieDetail from '@/components/MovieDetail.vue'
 import axios from 'axios'
 
 export default {
   name: 'Home',
   components: {
     MovieCard,
-    MovieDetail,
   },
   data: function () {
     return {
       movies: [],
-      selectedMovie: null,
     }
   },
   created: function () {
@@ -55,9 +45,6 @@ export default {
         Authorization: `JWT ${token}`,
       }
       return config
-    },
-    onMovieDetail: function (detail) {
-      this.selectedMovie = detail
     },
   },
 }

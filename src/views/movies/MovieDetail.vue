@@ -18,26 +18,36 @@
         <review :detail="detail" > </review>
       </div>
     </div>
+    <button @click="backtoHome">back</button>
   </div>
 </template>
 
 <script>
 import Review from '@/components/Review.vue'
 export default {
-  components: { Review },
-  name: 'MovieDetail',
-  data: {
-    reviews: null,
+  components: {
+    Review
   },
-  props: {
-    detail: Object,
+  name: 'MovieDetail',
+  data: function () {
+    return {
+      reviews: null,
+      detail: null,
+    }
+  },
+  created: function () {
+    this.detail = this.$route.params.detail
   },
   computed: {
     imgUrl: function () {
       return `https://image.tmdb.org/t/p/w500${this.detail.poster_path}`
     },
   },
-
+  methods: {
+    backtoHome: function () {
+      this.$router.push({name: 'Home'})
+    },
+  }
 }
 </script>
 

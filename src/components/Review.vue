@@ -13,9 +13,8 @@
     <button @click="addReview">등록</button>
     <ul v-for="review in reviews" :key="review.id">
       <li>
-        {{ review.rank }}
-        {{ review.content }}
-        <button @click="removeReview(review)">삭제</button>
+        작성자: {{review.user.username}} | 평점: {{ review.rank }} | {{ review.content }}
+        <button v-if="review.user.id === loginUserId" @click="removeReview(review)">삭제</button>
       </li>
     </ul>
   </div>
@@ -23,6 +22,7 @@
 
 <script>
 import axios from 'axios'
+import jwt_decode from "jwt-decode"
 
 export default {
   name: 'Review',
@@ -34,27 +34,37 @@ export default {
       reviews: [],
       reviewContent: null,
       rank: '',
+      loginUserId: null,
     }
   },
   created: function () {
-    axios({
-      method: 'get',
-      url: `http://127.0.0.1:8000/movies/${this.detail.id}/`,
-    })
-      .then((res) => {
-        this.reviews = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.getReview()
+    this.getUserID()
   },
   methods: {
+    getUserID: function () {
+      const userToken = localStorage.getItem('jwt')
+      const decodedToken = jwt_decode(userToken)
+      this.loginUserId = decodedToken.user_id
+    },
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
         Authorization: `JWT ${token}`,
       }
       return config
+    },
+    getReview: function () {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/movies/${this.detail.id}/`,
+      })
+        .then((res) => {
+          this.reviews = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     addReview: function () {
       axios({
@@ -64,19 +74,11 @@ export default {
         headers: this.setToken(),
       })
         .then((res) => {
+          console.log(res)
           this.reviews.push(res)
           this.reviewContent = null
           this.rank = ''
-          axios({
-            method: 'get',
-            url: `http://127.0.0.1:8000/movies/${this.detail.id}/`,
-          })
-            .then((res) => {
-              this.reviews = res.data
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+          this.getReview()
         })
         .catch((err) => {
           console.log(err)
@@ -89,16 +91,7 @@ export default {
         headers: this.setToken(),
       })
         .then(() => {
-          axios({
-            method: 'get',
-            url: `http://127.0.0.1:8000/movies/${this.detail.id}/`,
-          })
-            .then((res) => {
-              this.reviews = res.data
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+          this.getReview()
         })
         .catch((err) => {
           console.log(err)
