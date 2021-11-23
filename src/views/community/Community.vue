@@ -2,6 +2,7 @@
   <div>
     <h1>커뮤니티</h1>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <ul v-for="article in articles" :key="article.id">
       <li>
         <router-link class="rlink link-dark" :to="{ name: 'ArticleDetail', params: { articleId: article.id, article: article } }" :article="article">
@@ -11,6 +12,8 @@
       
     </ul>
 =======
+=======
+>>>>>>> Stashed changes
     <ol
       v-for="article in articles"
       :key="article.id"
