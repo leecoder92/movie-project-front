@@ -7,6 +7,7 @@
           {{ comment.content }}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
         </li>        
       </ul>
@@ -14,14 +15,19 @@
 =======
 >>>>>>> Stashed changes
           <button
+=======
+          <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
+        </li>        
+      </ul>
+          <!-- <button
+>>>>>>> Stashed changes
             v-if="comment.user_id === loginUserId"
             @click="deleteComment(comment)"
           >
             삭제
           </button>
         </li>
-      </ol>
->>>>>>> Stashed changes
+      </ol> -->
     </div>
     <hr />
     <div>

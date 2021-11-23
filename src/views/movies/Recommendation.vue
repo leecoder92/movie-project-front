@@ -1,64 +1,48 @@
 <template>
   <div>
     <h1>영화 추천</h1>
-    <!-- <<<<<<< Updated upstream
     <div>
       <h3>설명: 로그인한 사람이 평점을 4점 이상으로 남긴 영화들의 장르를 모아서 비슷한 장르의 영화를 추천</h3>
-      <ul v-for="review in myReviews" :key="review.id">
-        <li>
-          {{ review.rank }}점: {{ review.movie.title }}
-        </li>
-      </ul>
+      <recommend-v2
+        v-for="movie2 in movies2"
+        :key="movie2.id"
+        :movie2="movie2"
+      >        
+      </recommend-v2>
     </div>
-======= -->
-    <user-recommend
-      v-for="movie in movies"
-      :key="movie.id"
-      :movie="movie"
-      @movie-detail="onMovieDetail"
-    ></user-recommend>
+    <hr>
+    <div>
+      <user-recommend
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+      >
+      </user-recommend>
+    </div>
+    
   </div>
 </template>
 
 <script>
-// <<<<<<< Updated upstream
-// import axios from 'axios'
-
-// export default {
-//   name: 'Recommendation',
-//   data: function () {
-//     return {
-//       myReviews: null,
-//     }
-//   },
-//   created: function () {
-//     this.getMyReviews()
-// =======
 import UserRecommend from '@/components/UserRecommend.vue'
+import RecommendV2 from '@/components/RecommendV2.vue'
 import axios from 'axios'
+
 export default {
   name: 'Recommendation',
-  components: { UserRecommend },
+  components: {
+    UserRecommend,
+    RecommendV2,
+  },
   data: function () {
     return {
       movies: [],
-      selectedMovie: null,
+      movies2: [],
     }
   },
   created: function () {
-    axios({
-      method: 'get',
-      url: 'http://127.0.0.1:8000/movies/recommend/',
-      headers: this.setToken(),
-    })
-      .then((res) => {
-        console.log(res)
-        this.movies = res.data
-
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    this.recommend()
+    this.recommendByReview()
   },
   methods: {
     setToken: function () {
@@ -66,11 +50,36 @@ export default {
       const config = {
         Authorization: `JWT ${token}`,
       }
-
       return config
     },
-    onMovieDetail: function (detail) {
-      this.selectedMovie = detail
+    recommendByReview: function () {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/recommendv2/',
+        headers: this.setToken(),
+      })
+        .then(res => {
+          // console.log(res)
+          this.movies2 = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    recommend: function () {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/movies/recommend/',
+        headers: this.setToken(),
+      })
+        .then((res) => {
+          // console.log(res)
+          this.movies = res.data
+
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
 }
