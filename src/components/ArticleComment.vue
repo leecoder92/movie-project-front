@@ -2,12 +2,12 @@
   <div>
     <div>
       <h3>댓글</h3>
-      <ol v-for="comment in comments" :key="comment.pk">
+      <ul v-for="comment in comments" :key="comment.pk">
         <li>
           {{ comment.content }}
           <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
         </li>        
-      </ol>
+      </ul>
     </div>
     <hr>
     <div>

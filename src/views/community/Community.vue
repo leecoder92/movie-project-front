@@ -1,14 +1,14 @@
 <template>
   <div>
     <h1>커뮤니티</h1>
-    <ol v-for="article in articles" :key="article.id">
+    <ul v-for="article in articles" :key="article.id">
       <li>
         <router-link class="rlink link-dark" :to="{ name: 'ArticleDetail', params: { articleId: article.id, article: article } }" :article="article">
           {{ article.title }}
         </router-link>
       </li>
       
-    </ol>
+    </ul>
     <button @click="createArticle">글 작성</button>
   </div>
 </template>

@@ -39,6 +39,9 @@ export default {
   },
   created: function () {
     this.getReview()
+    // this.getUserID()
+  },
+  updated: function () {
     this.getUserID()
   },
   methods: {
@@ -74,8 +77,8 @@ export default {
         headers: this.setToken(),
       })
         .then((res) => {
-          console.log(res)
-          this.reviews.push(res)
+          // console.log(res)
+          this.reviews.push(res.data)
           this.reviewContent = null
           this.rank = ''
           this.getReview()
