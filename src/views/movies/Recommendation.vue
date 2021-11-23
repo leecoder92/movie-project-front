@@ -1,16 +1,6 @@
 <template>
   <div>
-    <h1>영화 추천</h1>
-    <div>
-      <h3>설명: 로그인한 사람이 평점을 4점 이상으로 남긴 영화들의 장르를 모아서 비슷한 장르의 영화를 추천</h3>
-      <recommend-v2
-        v-for="movie2 in movies2"
-        :key="movie2.id"
-        :movie2="movie2"
-      >        
-      </recommend-v2>
-    </div>
-    <hr>
+    <h1>영화 추천</h1>      
     <div>
       <user-recommend
         v-for="movie in movies"
@@ -18,6 +8,15 @@
         :movie="movie"
       >
       </user-recommend>
+    </div>
+    <hr>
+    <div>
+      <recommend-v2
+        v-for="movie2 in movies2"
+        :key="movie2.id"
+        :movie2="movie2"
+      >        
+      </recommend-v2>
     </div>
     
   </div>

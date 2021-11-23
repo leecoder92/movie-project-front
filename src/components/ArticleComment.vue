@@ -5,31 +5,11 @@
       <ul v-for="comment in comments" :key="comment.pk">
         <li>
           {{ comment.content }}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
           <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
         </li>        
       </ul>
-=======
-=======
->>>>>>> Stashed changes
-          <button
-=======
-          <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
-        </li>        
-      </ul>
-          <!-- <button
->>>>>>> Stashed changes
-            v-if="comment.user_id === loginUserId"
-            @click="deleteComment(comment)"
-          >
-            삭제
-          </button>
-        </li>
-      </ol> -->
     </div>
-    <hr />
+    <hr>
     <div>
       <label for="text">댓글을 입력하세요:</label>
       <input
