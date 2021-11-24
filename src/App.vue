@@ -141,7 +141,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+<<<<<<< Updated upstream
   background-color: #2b2a2a;
+=======
+  background-color: black;
+>>>>>>> Stashed changes
 }
 
 </style>
