@@ -1,24 +1,36 @@
 <template>
-  <div>
-    <h1>영화 추천</h1>      
+  <div id="title">
+    <h1 class="d-flex justify-content-center mt-5">영화 추천</h1>
     <div>
-      <user-recommend
-        v-for="movie in movies"
-        :key="movie.id"
-        :movie="movie"
+      <div class="m-5"><h2>댓글로 보는 별점 순</h2></div>
+      <div
+        class="
+          row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4
+          g-4
+          mx-auto
+        "
       >
-      </user-recommend>
+        <user-recommend v-for="movie in movies" :key="movie.id" :movie="movie">
+        </user-recommend>
+      </div>
     </div>
-    <hr>
     <div>
-      <recommend-v2
-        v-for="movie2 in movies2"
-        :key="movie2.id"
-        :movie2="movie2"
-      >        
-      </recommend-v2>
+      <div class="m-5"><h2>즐겨보는 장르 평점순</h2></div>
+      <div
+        class="
+          row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4
+          g-5
+          mx-auto
+        "
+      >
+        <recommend-v2
+          v-for="movie2 in movies2"
+          :key="movie2.id"
+          :movie2="movie2"
+        >
+        </recommend-v2>
+      </div>
     </div>
-    
   </div>
 </template>
 
@@ -57,11 +69,11 @@ export default {
         url: 'http://127.0.0.1:8000/movies/recommendv2/',
         headers: this.setToken(),
       })
-        .then(res => {
+        .then((res) => {
           // console.log(res)
           this.movies2 = res.data
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -74,7 +86,6 @@ export default {
         .then((res) => {
           // console.log(res)
           this.movies = res.data
-
         })
         .catch((err) => {
           console.log(err)

@@ -1,16 +1,35 @@
 <template>
-  <div>
-    <h1>글 작성</h1>
-    <div>
-      <label for="text">글 제목: </label>
-      <input v-model.trim="title" type="text">
-    </div>
-    <div>
-      <label for="content">글 내용: </label>
-      <textarea v-model="content" name="content" id="content" cols="30" rows="10"></textarea>
-    </div>
-    <button @click="requestCreate">작성하기</button>
-    <button @click="returnToCommunity">뒤로 가기</button>
+  <div class="ArticleForm">
+    <b-container bg-variant="black" fluid="sm">
+      <b-form-group
+        class="mt-3"
+        label="새글 작성"
+        label-size="lg"
+        label-class="font-weight-bold"
+      ></b-form-group>
+      <b-form-group label="글 제목: " label-for="title">
+        <b-form-input
+          v-model.trim="title"
+          type="text"
+          id="title"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group label="글 내용: " label-for="content">
+        <b-form-textarea
+          v-model="content"
+          name="content"
+          id="content"
+          cols="30"
+          rows="10"
+        ></b-form-textarea>
+      </b-form-group>
+      <b-button-group class="my-3">
+        <b-button pill @click="requestCreate">작성하기</b-button>
+        <b-button pill @click="returnToCommunity" class="ms-1"
+          >뒤로 가기</b-button
+        >
+      </b-button-group>
+    </b-container>
   </div>
 </template>
 
@@ -29,35 +48,38 @@ export default {
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
-        Authorization: `JWT ${token}`
+        Authorization: `JWT ${token}`,
       }
       return config
     },
     requestCreate: function () {
       const articleItem = {
         title: this.title,
-        content: this.content
+        content: this.content,
       }
       axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/community/',
         data: articleItem,
-        headers: this.setToken()
+        headers: this.setToken(),
       })
         .then(() => {
-          this.$router.push({name: 'Community'})
+          this.$router.push({ name: 'Community' })
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
     returnToCommunity: function () {
-      this.$router.push({name: 'Community'})
-    }
-  }
+      this.$router.push({ name: 'Community' })
+    },
+  },
 }
 </script>
 
 <style>
-
+.ArticleForm {
+  color: white;
+  text-align: start;
+}
 </style>

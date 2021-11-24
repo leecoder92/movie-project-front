@@ -1,24 +1,36 @@
 <template>
-  <div>
-    <h1>Sign up</h1>
-    <div>
-      <label for="username">사용자 이름: </label>
-      <input type="text" id="username" v-model="credentials.username" />
-    </div>
-    <div>
-      <label for="password">비밀번호: </label>
-      <input type="password" id="password" v-model="credentials.password" />
-    </div>
-    <div>
-      <label for="passwordConfirmation">비밀번호 확인: </label>
-      <input
-        type="password"
-        id="passwordConfirmation"
-        v-model="credentials.passwordConfirmation"
-        @keyup.enter="signup"
-      />
-    </div>
-    <button @click="signup">회원가입</button>
+  <div class="SignupForm">
+    <b-container bg-variant="black" fluid="sm">
+      <b-form-group
+        class="mt-3"
+        label="회원 가입"
+        label-size="lg"
+        label-class="font-weight-bold"
+      ></b-form-group>
+      <b-form-group label="사용자 이름: " label-for="username">
+        <b-form-input
+          type="text"
+          id="username"
+          v-model="credentials.username"
+        />
+      </b-form-group>
+      <b-form-group label="비밀번호: " label-for="password">
+        <b-form-input
+          type="password"
+          id="password"
+          v-model="credentials.password"
+        />
+      </b-form-group>
+      <b-form-group label="비밀번호 확인: " label-for="passwordConfirmation">
+        <b-form-input
+          type="password"
+          id="passwordConfirmation"
+          v-model="credentials.passwordConfirmation"
+          @keyup.enter="signup"
+        />
+      </b-form-group>
+      <b-button pill @click="signup" class="my-3">회원가입</b-button>
+    </b-container>
   </div>
 </template>
 
@@ -54,4 +66,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.SignupForm {
+  color: white;
+  text-align: start;
+}
+</style>

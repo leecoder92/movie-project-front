@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <router-link class="nav-link link-dark" to="/movies"
-          >프로젝트</router-link
+
+          ><img :src="require(`@/assets/jjsg_logo.png`)" alt="" width="40" height="40" ></router-link
         >
         <span v-if="isLogin" class="navbar-text">
           반갑습니다 {{ loginUsername }}님!
@@ -34,7 +35,10 @@
                 <router-link
                   class="nav-link active"
                   aria-current="page"
-                  :to="{ name: 'Recommendation', params: { userId: loginUserId } }"
+                  :to="{
+                    name: 'Recommendation',
+                    params: { userId: loginUserId },
+                  }"
                   >추천</router-link
                 >
               </li>
@@ -84,11 +88,11 @@
         </div>
       </div>
     </nav>
-    <router-view @login="isLogin=true" />
+    <router-view @login="isLogin = true" />
   </div>
 </template>
 <script>
-import jwt_decode from "jwt-decode"
+import jwt_decode from 'jwt-decode'
 
 export default {
   name: 'App',
@@ -105,8 +109,7 @@ export default {
       this.isLogin = true
       this.getUsername()
     }
-    if(this.$route.path!=='/movies')
-      this.$router.push({name:'Home'})
+    if (this.$route.path !== '/movies') this.$router.push({ name: 'Home' })
   },
   updated: function () {
     const token = localStorage.getItem('jwt')
@@ -138,5 +141,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background-color: #2b2a2a;
 }
+
 </style>

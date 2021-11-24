@@ -1,11 +1,18 @@
 <template>
   <div>
-      <movie-card
-        v-for="movie in movies"
-        :key="movie.id"
-        :movie="movie"
-      >
+    <div class="my-3 d-flex justify-content-center" id="title">
+      <h1>전체 영화 목록</h1>
+    </div>
+    <div
+      class="
+        row row-cols-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4
+        g-4
+        mx-auto
+      "
+    >
+      <movie-card v-for="movie in movies" :key="movie.id" :movie="movie">
       </movie-card>
+    </div>
   </div>
 </template>
 
@@ -46,3 +53,8 @@ export default {
   },
 }
 </script>
+<style>
+#title {
+  color: white;
+}
+</style>

@@ -1,25 +1,55 @@
 <template>
-  <div>
-    <h1>
-      {{ article.title }}
-    </h1>
-    <p>작성일: {{ createdDate }}</p>
-    <p>수정일: {{ updatedDate }}</p>
-    <p>내용: {{ article.content }}</p>
-    <button v-if="article.user_id === loginUserId" @click="updateArticle">수정</button>
-    <button v-if="article.user_id === loginUserId" @click="deleteArticle(article)">삭제</button>
-    <hr>
-    <article-comment :article="article"></article-comment>
-    <hr>
-    <button @click="backtoCommunity">back</button>
-  </div>
+  <b-container class="ArticleDetail my-3">
+    <div class="d-flex justify-content-center">
+      <h1>
+        {{ article.title }}
+      </h1>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      작성일: {{ createdDate }}
+      <br />
+      수정일: {{ updatedDate }}
+    </div>
+    <hr />
+    <div class="py-3">
+      <p>{{ article.content }}</p>
+    </div>
+    <div class="d-flex justify-content-end">
+      <b-button-group>
+        <b-button
+          class="mx-1"
+          pill
+          v-if="article.user_id === loginUserId"
+          @click="updateArticle"
+        >
+          수정
+        </b-button>
+        <b-button
+          class="mx-1"
+          pill
+          v-if="article.user_id === loginUserId"
+          @click="deleteArticle(article)"
+        >
+          삭제
+        </b-button>
+      </b-button-group>
+    </div>
+    <hr />
+    <b-row>
+      <article-comment :article="article"></article-comment>
+    </b-row>
+    <div class="d-flex justify-content-end">
+      <b-button pill @click="backtoCommunity" class="my-3">back</b-button>
+    </div>
+  </b-container>
 </template>
 
 <script>
 import ArticleComment from '@/components/ArticleComment.vue'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import jwt_decode from "jwt-decode"
+import jwt_decode from 'jwt-decode'
 
 export default {
   name: 'ArticleDetail',
@@ -36,8 +66,12 @@ export default {
   },
   created: function () {
     this.article = this.$route.params.article
-    this.createdDate = dayjs(this.article.created_at).format("YYYY-MM-DD HH:mm:ss")
-    this.updatedDate = dayjs(this.article.updated_at).format("YYYY-MM-DD HH:mm:ss")
+    this.createdDate = dayjs(this.article.created_at).format(
+      'YYYY-MM-DD HH:mm:ss'
+    )
+    this.updatedDate = dayjs(this.article.updated_at).format(
+      'YYYY-MM-DD HH:mm:ss'
+    )
     this.getUserID()
   },
   methods: {
@@ -49,27 +83,30 @@ export default {
     setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
-        Authorization: `JWT ${token}`
+        Authorization: `JWT ${token}`,
       }
       return config
     },
     backtoCommunity: function () {
-      this.$router.push({name: 'Community'})
+      this.$router.push({ name: 'Community' })
     },
     updateArticle: function () {
-      this.$router.push({name: 'UpdateArticle', params: { article: this.article }})
+      this.$router.push({
+        name: 'UpdateArticle',
+        params: { article: this.article },
+      })
     },
     deleteArticle: function (article) {
       axios({
         method: 'delete',
         url: `http://127.0.0.1:8000/community/${article.id}/`,
-        headers: this.setToken()
+        headers: this.setToken(),
       })
-        .then(res => {
+        .then((res) => {
           console.log(res)
-          this.$router.push({name: 'Community'})
+          this.$router.push({ name: 'Community' })
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -78,5 +115,8 @@ export default {
 </script>
 
 <style>
-
+.ArticleDetail {
+  color: white;
+  text-align: start;
+}
 </style>

@@ -1,24 +1,37 @@
 <template>
   <div>
-    <div>
-      <h3>댓글</h3>
+    <div class="d-flex flex-column">
+      <h5>댓글</h5>
       <ul v-for="comment in comments" :key="comment.pk">
-        <li>
-          {{ comment.content }}
-          <button v-if="comment.user_id === loginUserId" @click="deleteComment(comment)">삭제</button>
-        </li>        
+        <li class="d-flex justify-content-between ">
+          <p class="my-auto">{{ comment.content }}</p>
+          <b-button
+            pill
+            v-if="comment.user_id === loginUserId"
+            @click="deleteComment(comment)"
+          >
+            삭제
+          </b-button>
+        </li>
       </ul>
     </div>
-    <hr>
-    <div>
-      <label for="text">댓글을 입력하세요:</label>
-      <input
+    <hr />
+    <b-form-group
+      label="댓글을 입력하세요:"
+      label-for="Comments"
+    ></b-form-group>
+    <b-input-group class="my-3">
+      <b-form-input
+        id="Comments"
         v-model.trim="newContent"
         @keyup.enter="createComment"
         type="text"
+        class="me-2"
       />
-      <button @click="createComment">입력</button>
-    </div>
+      <b-input-group-append>
+        <b-button pill @click="createComment">입력</b-button>
+      </b-input-group-append>
+    </b-input-group>
   </div>
 </template>
 

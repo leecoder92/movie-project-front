@@ -1,7 +1,8 @@
 <template>
-  <div class="container w-50 ">
+  <div class="container w-50 mt-5">
 
-    <b-card header="자유 게시판" class="text-center">
+    <b-card  class="text-center text-white" style="background-color:#2b2a2a" header-level="2">
+      <div><h1>자유 게시판</h1></div>
       <div class="container-fluid">
         <b-list-group>
           <b-list-group-item
@@ -21,6 +22,7 @@
             </router-link>
           </b-list-group-item>
         </b-list-group>
+        
       </div>
       <br />
       <div class="d-flex flex-row-reverse">

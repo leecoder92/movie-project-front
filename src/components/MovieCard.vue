@@ -1,11 +1,15 @@
 <template>
-  <div class="card mx-auto" style="width: 18rem">
-    <img :src="imgUrl" class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title">
-        <router-link class="link-dark" :to="{ name: 'MovieDetail', params: {movieId: movie.id, detail: movie} }">{{ movie.title }}</router-link>
-      </h5>
-    </div>
+  <div class="mx-auto" style="width: 18rem">
+    <router-link
+      class="link-dark text-decoration-none"
+      :to="{
+        name: 'MovieDetail',
+        params: { movieId: movie.id, detail: movie },
+      }"
+    >
+      <img :src="imgUrl" class="card-img-top" alt="..." />
+
+    </router-link>
   </div>
 </template>
 
