@@ -102,8 +102,7 @@ export default {
         url: `http://127.0.0.1:8000/community/${article.id}/`,
         headers: this.setToken(),
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           this.$router.push({ name: 'Community' })
         })
         .catch((err) => {

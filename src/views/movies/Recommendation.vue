@@ -51,9 +51,13 @@ export default {
       movies2: [],
     }
   },
-  created: function () {
-    this.recommend()
-    this.recommendByReview()
+  created: function () {    
+    if (localStorage.getItem('jwt')) {
+      this.recommend()
+      this.recommendByReview()
+    } else {
+      this.$router.push({ name: 'Login' })
+    }
   },
   methods: {
     setToken: function () {

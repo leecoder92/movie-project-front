@@ -2,17 +2,8 @@
   <div>
     <div class="d-flex flex-column">
       <h5>댓글</h5>
-      <ul v-for="comment in comments" :key="comment.pk">
-        <li class="d-flex justify-content-between ">
-          <p class="my-auto">{{ comment.content }}</p>
-          <b-button
-            pill
-            v-if="comment.user_id === loginUserId"
-            @click="deleteComment(comment)"
-          >
-            삭제
-          </b-button>
-        </li>
+      <ul v-for="comment in comments" :key="comment.id">
+        <comment :comment="comment" :article="article" @get-comment="onGetComment"></comment>
       </ul>
     </div>
     <hr />
@@ -37,10 +28,14 @@
 
 <script>
 import axios from 'axios'
-import jwt_decode from 'jwt-decode'
+
+import Comment from '@/components/Comment.vue'
 
 export default {
   name: 'ArticleComment',
+  components: {
+    Comment,
+  },
   props: {
     article: Object,
   },
@@ -57,14 +52,10 @@ export default {
     } else {
       this.$router.push({ name: 'Login' })
     }
-    this.getUserID()
-    // console.log(this.loginUserId)
   },
   methods: {
-    getUserID: function () {
-      const userToken = localStorage.getItem('jwt')
-      const decodedToken = jwt_decode(userToken)
-      this.loginUserId = decodedToken.user_id
+    onGetComment: function () {
+      this.getComments()
     },
     setToken: function () {
       const token = localStorage.getItem('jwt')
@@ -80,7 +71,6 @@ export default {
         headers: this.setToken(),
       })
         .then((res) => {
-          // console.log(res)
           this.comments = res.data
         })
         .catch((err) => {
@@ -105,21 +95,27 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },    
+    requireUpdate: function () {
+      this.isUpdated = true
     },
-    deleteComment: function (comment) {
+    cancelUpdate: function () {
+      this.isUpdated = false
+    },
+    updateComment: function (comment) {
       axios({
-        method: 'delete',
+        method: 'put',
         url: `http://127.0.0.1:8000/community/${this.article.id}/${comment.id}/`,
         headers: this.setToken(),
       })
         .then(() => {
-          // console.log(res)
+          this.isUpdated = false
           this.getComments()
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
-    },
+    }
   },
 }
 </script>

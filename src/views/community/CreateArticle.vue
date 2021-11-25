@@ -9,6 +9,7 @@
       ></b-form-group>
       <b-form-group label="글 제목: " label-for="title">
         <b-form-input
+          class="text-black"
           v-model.trim="title"
           type="text"
           id="title"

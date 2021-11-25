@@ -53,7 +53,7 @@ export default {
       options: [
         { value: '', text: '별점' },
         { value: '5', text: '*****' },
-        { value: '4', text: '***' },
+        { value: '4', text: '****' },
         { value: '3', text: '***' },
         { value: '2', text: '**' },
         { value: '1', text: '*' },

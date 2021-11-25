@@ -12,6 +12,7 @@
           v-model.trim="article.title"
           type="text"
           id="title"
+          class="text-black"
         ></b-form-input>
       </b-form-group>
       <b-form-group label="글 내용: " label-for="content">
